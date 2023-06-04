@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
 
@@ -72,6 +73,23 @@ class test_add_contact(unittest.TestCase):
         wd.find_element(By.NAME, "homepage").click()
         wd.find_element(By.NAME, "homepage").clear()
         wd.find_element(By.NAME, "homepage").send_keys("www.hopg.com")
+        Select(wd.find_element(By.NAME, "bday")).select_by_visible_text("7")
+        wd.find_element(By.XPATH, "//option[@value='7']").click()
+        wd.find_element(By.NAME, "bmonth").click()
+        Select(wd.find_element(By.NAME, "bmonth")).select_by_visible_text("July")
+        wd.find_element(By.XPATH, "//option[@value='July']").click()
+        wd.find_element(By.NAME, "byear").click()
+        wd.find_element(By.NAME, "byear").clear()
+        wd.find_element(By.NAME, "byear").send_keys("1977")
+        wd.find_element(By.NAME, "aday").click()
+        Select(wd.find_element(By.NAME, "aday")).select_by_visible_text("10")
+        wd.find_element(By.XPATH, "//select[3]/option[12]").click()
+        wd.find_element(By.NAME, "amonth").click()
+        Select(wd.find_element(By.NAME, "amonth")).select_by_visible_text("October")
+        wd.find_element(By.XPATH, "//select[4]/option[11]").click()
+        wd.find_element(By.NAME, "ayear").click()
+        wd.find_element(By.NAME, "ayear").clear()
+        wd.find_element(By.NAME, "ayear").send_keys("2010")
         wd.find_element(By.NAME, "address2").click()
         wd.find_element(By.NAME, "address2").clear()
         wd.find_element(By.NAME, "address2").send_keys("adr2")
