@@ -18,103 +18,96 @@ class test_add_contact(unittest.TestCase):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
 
-    def test_add_contact(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd)
-        self.open_contacts_page(wd)
-        self.create_contact(wd)
-        self.return_to_home_page(wd)
-        self.logout(wd)
-
     def open_home_page(self, wd):
         wd.get("https://localhost/addressbook/")
 
-    def login(self, wd):
+    def login(self, wd, username, password):
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").clear()
-        wd.find_element(By.NAME, "user").send_keys("admin")
+        wd.find_element(By.NAME, "user").send_keys(username)
         wd.find_element(By.NAME, "pass").clear()
-        wd.find_element(By.NAME, "pass").send_keys("secret")
+        wd.find_element(By.NAME, "pass").send_keys(password)
         wd.find_element(By.XPATH, "//input[@value='Login']").click()
 
     def open_contacts_page(self, wd):
 
         wd.find_element(By.LINK_TEXT, "add new").click()
 
-    def create_contact(self, wd):
+    def create_contact(self, wd, firstname, middlename, lastname, nickname, title, company, address, home, mobile, work,
+                       fax, email, email2, email3, homepage, bday, bmonth, byear, aday, amonth, ayear, address2, phone2,
+                       notes):
         # fill contact form
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
-        wd.find_element(By.NAME, "firstname").send_keys("fn")
+        wd.find_element(By.NAME, "firstname").send_keys(firstname)
         wd.find_element(By.NAME, "middlename").click()
         wd.find_element(By.NAME, "middlename").clear()
-        wd.find_element(By.NAME, "middlename").send_keys("mn")
+        wd.find_element(By.NAME, "middlename").send_keys(middlename)
         wd.find_element(By.NAME, "lastname").click()
         wd.find_element(By.NAME, "lastname").clear()
-        wd.find_element(By.NAME, "lastname").send_keys("ln")
+        wd.find_element(By.NAME, "lastname").send_keys(lastname)
         wd.find_element(By.NAME, "nickname").click()
         wd.find_element(By.NAME, "nickname").clear()
-        wd.find_element(By.NAME, "nickname").send_keys("nn")
+        wd.find_element(By.NAME, "nickname").send_keys(nickname)
         wd.find_element(By.NAME, "title").click()
         wd.find_element(By.NAME, "title").clear()
-        wd.find_element(By.NAME, "title").send_keys("ttl")
+        wd.find_element(By.NAME, "title").send_keys(title)
         wd.find_element(By.NAME, "company").click()
         wd.find_element(By.NAME, "company").clear()
-        wd.find_element(By.NAME, "company").send_keys("cmp")
+        wd.find_element(By.NAME, "company").send_keys(company)
         wd.find_element(By.NAME, "address").click()
         wd.find_element(By.NAME, "address").clear()
-        wd.find_element(By.NAME, "address").send_keys("adr1")
+        wd.find_element(By.NAME, "address").send_keys(address)
         wd.find_element(By.NAME, "home").click()
         wd.find_element(By.NAME, "home").clear()
-        wd.find_element(By.NAME, "home").send_keys("111111")
+        wd.find_element(By.NAME, "home").send_keys(home)
         wd.find_element(By.NAME, "mobile").click()
         wd.find_element(By.NAME, "mobile").clear()
-        wd.find_element(By.NAME, "mobile").send_keys("222222")
+        wd.find_element(By.NAME, "mobile").send_keys(mobile)
         wd.find_element(By.NAME, "work").click()
         wd.find_element(By.NAME, "work").clear()
-        wd.find_element(By.NAME, "work").send_keys("333333")
+        wd.find_element(By.NAME, "work").send_keys(work)
         wd.find_element(By.NAME, "fax").click()
         wd.find_element(By.NAME, "fax").clear()
-        wd.find_element(By.NAME, "fax").send_keys("444444")
+        wd.find_element(By.NAME, "fax").send_keys(fax)
         wd.find_element(By.NAME, "email").click()
         wd.find_element(By.NAME, "email").clear()
-        wd.find_element(By.NAME, "email").send_keys("mail@mail.com")
+        wd.find_element(By.NAME, "email").send_keys(email)
         wd.find_element(By.NAME, "email2").click()
         wd.find_element(By.NAME, "email2").clear()
-        wd.find_element(By.NAME, "email2").send_keys("mail2@mail.com")
+        wd.find_element(By.NAME, "email2").send_keys(email2)
         wd.find_element(By.NAME, "email3").click()
         wd.find_element(By.NAME, "email3").clear()
-        wd.find_element(By.NAME, "email3").send_keys("mail3@mail.com")
+        wd.find_element(By.NAME, "email3").send_keys(email3)
         wd.find_element(By.NAME, "homepage").click()
         wd.find_element(By.NAME, "homepage").clear()
-        wd.find_element(By.NAME, "homepage").send_keys("www.hopg.com")
-        Select(wd.find_element(By.NAME, "bday")).select_by_visible_text("7")
+        wd.find_element(By.NAME, "homepage").send_keys(homepage)
+        Select(wd.find_element(By.NAME, "bday")).select_by_visible_text(bday)
         wd.find_element(By.XPATH, "//option[@value='7']").click()
         wd.find_element(By.NAME, "bmonth").click()
-        Select(wd.find_element(By.NAME, "bmonth")).select_by_visible_text("July")
+        Select(wd.find_element(By.NAME, "bmonth")).select_by_visible_text(bmonth)
         wd.find_element(By.XPATH, "//option[@value='July']").click()
         wd.find_element(By.NAME, "byear").click()
         wd.find_element(By.NAME, "byear").clear()
-        wd.find_element(By.NAME, "byear").send_keys("1977")
+        wd.find_element(By.NAME, "byear").send_keys(byear)
         wd.find_element(By.NAME, "aday").click()
-        Select(wd.find_element(By.NAME, "aday")).select_by_visible_text("10")
+        Select(wd.find_element(By.NAME, "aday")).select_by_visible_text(aday)
         wd.find_element(By.XPATH, "//select[3]/option[12]").click()
         wd.find_element(By.NAME, "amonth").click()
-        Select(wd.find_element(By.NAME, "amonth")).select_by_visible_text("October")
+        Select(wd.find_element(By.NAME, "amonth")).select_by_visible_text(amonth)
         wd.find_element(By.XPATH, "//select[4]/option[11]").click()
         wd.find_element(By.NAME, "ayear").click()
         wd.find_element(By.NAME, "ayear").clear()
-        wd.find_element(By.NAME, "ayear").send_keys("2010")
+        wd.find_element(By.NAME, "ayear").send_keys(ayear)
         wd.find_element(By.NAME, "address2").click()
         wd.find_element(By.NAME, "address2").clear()
-        wd.find_element(By.NAME, "address2").send_keys("adr2")
+        wd.find_element(By.NAME, "address2").send_keys(address2)
         wd.find_element(By.NAME, "phone2").click()
         wd.find_element(By.NAME, "phone2").clear()
-        wd.find_element(By.NAME, "phone2").send_keys("555555")
+        wd.find_element(By.NAME, "phone2").send_keys(phone2)
         wd.find_element(By.NAME, "notes").click()
         wd.find_element(By.NAME, "notes").clear()
-        wd.find_element(By.NAME, "notes").send_keys("test")
+        wd.find_element(By.NAME, "notes").send_keys(notes)
         # submit form
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
 
@@ -123,6 +116,17 @@ class test_add_contact(unittest.TestCase):
 
     def logout(self, wd):
         wd.find_element(By.LINK_TEXT, "Logout").click()
+
+    def test_add_contact(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.open_contacts_page(wd)
+        self.create_contact(wd, firstname="fn", middlename="mn", lastname="ln", nickname="nn", title="ttl", company="cmp", address="adr1", home="111111", mobile="222222", work="333333", fax="444444",
+                            email="mail@mail.com", email2="mail2@mail.com", email3="mail3@mail.com", homepage="www.hopg.com", bday="7", bmonth="July", byear="1977",
+                            aday="10", amonth="October", ayear="2010", address2="adr2", phone2="555555", notes="test")
+        self.return_to_home_page(wd)
+        self.logout(wd)
 
     def tearDown(self):
         self.wd.quit()
