@@ -17,6 +17,7 @@ def is_alert_present(wd):
 class test_add_contact(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
+        self.wd.maximize_window()
         self.wd.implicitly_wait(60)
 
     def open_home_page(self, wd):
