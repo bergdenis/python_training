@@ -83,19 +83,15 @@ class test_add_contact(unittest.TestCase):
         wd.find_element(By.NAME, "homepage").clear()
         wd.find_element(By.NAME, "homepage").send_keys(contactData.homepage)
         Select(wd.find_element(By.NAME, "bday")).select_by_visible_text(contactData.bday)
-        wd.find_element(By.XPATH, "//option[@value='7']").click()
         wd.find_element(By.NAME, "bmonth").click()
         Select(wd.find_element(By.NAME, "bmonth")).select_by_visible_text(contactData.bmonth)
-        wd.find_element(By.XPATH, "//option[@value='July']").click()
         wd.find_element(By.NAME, "byear").click()
         wd.find_element(By.NAME, "byear").clear()
         wd.find_element(By.NAME, "byear").send_keys(contactData.byear)
         wd.find_element(By.NAME, "aday").click()
         Select(wd.find_element(By.NAME, "aday")).select_by_visible_text(contactData.aday)
-        wd.find_element(By.XPATH, "//select[3]/option[12]").click()
         wd.find_element(By.NAME, "amonth").click()
         Select(wd.find_element(By.NAME, "amonth")).select_by_visible_text(contactData.amonth)
-        wd.find_element(By.XPATH, "//select[4]/option[11]").click()
         wd.find_element(By.NAME, "ayear").click()
         wd.find_element(By.NAME, "ayear").clear()
         wd.find_element(By.NAME, "ayear").send_keys(contactData.ayear)
@@ -109,7 +105,7 @@ class test_add_contact(unittest.TestCase):
         wd.find_element(By.NAME, "notes").clear()
         wd.find_element(By.NAME, "notes").send_keys(contactData.notes)
         # submit form
-        wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
+        wd.find_element(By.NAME, "submit").click()
 
     def return_to_home_page(self, wd):
         wd.find_element(By.LINK_TEXT, "home page").click()
