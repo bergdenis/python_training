@@ -24,6 +24,7 @@ class test_add_contact(unittest.TestCase):
         wd.get("https://localhost/addressbook/")
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").clear()
         wd.find_element(By.NAME, "user").send_keys(username)
@@ -32,10 +33,10 @@ class test_add_contact(unittest.TestCase):
         wd.find_element(By.XPATH, "//input[@value='Login']").click()
 
     def open_contacts_page(self, wd):
-
         wd.find_element(By.LINK_TEXT, "add new").click()
 
     def create_contact(self, wd, contactData):
+        self.open_contacts_page(wd)
         # fill contact form
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
@@ -106,6 +107,7 @@ class test_add_contact(unittest.TestCase):
         wd.find_element(By.NAME, "notes").send_keys(contactData.notes)
         # submit form
         wd.find_element(By.NAME, "submit").click()
+        self.return_to_home_page(wd)
 
     def return_to_home_page(self, wd):
         wd.find_element(By.LINK_TEXT, "home page").click()
@@ -115,13 +117,10 @@ class test_add_contact(unittest.TestCase):
 
     def test_add_contact(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_contacts_page(wd)
         self.create_contact(wd, ContactData(firstname="fn", middlename="mn", lastname="ln", nickname="nn", title="ttl", company="cmp", address="adr1", home_number="111111", mobile_number="222222", work_number="333333", fax_number="444444",
                             email="mail@mail.com", email2="mail2@mail.com", email3="mail3@mail.com", homepage="www.hopg.com", bday="7", bmonth="July", byear="1977",
                             aday="10", amonth="October", ayear="2010", address2="adr2", phone2="555555", notes="test"))
-        self.return_to_home_page(wd)
         self.logout(wd)
 
     def tearDown(self):
