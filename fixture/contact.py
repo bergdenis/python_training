@@ -94,6 +94,31 @@ class ContactHelper:
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
 
+    def edit_first_contact(self, contactData):
+        wd = self.app.wd
+        # init contact edition
+        wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
+        # edit contact form
+        wd.find_element(By.NAME, "address").click()
+        wd.find_element(By.NAME, "address").clear()
+        wd.find_element(By.NAME, "address").send_keys(contactData.address)
+        wd.find_element(By.NAME, "homepage").click()
+        wd.find_element(By.NAME, "homepage").clear()
+        wd.find_element(By.NAME, "homepage").send_keys(contactData.homepage)
+        wd.find_element(By.NAME, "aday").click()
+        Select(wd.find_element(By.NAME, "aday")).select_by_visible_text(contactData.aday)
+        wd.find_element(By.NAME, "amonth").click()
+        Select(wd.find_element(By.NAME, "amonth")).select_by_visible_text(contactData.amonth)
+        wd.find_element(By.NAME, "ayear").click()
+        wd.find_element(By.NAME, "ayear").clear()
+        wd.find_element(By.NAME, "ayear").send_keys(contactData.ayear)
+        wd.find_element(By.NAME, "notes").click()
+        wd.find_element(By.NAME, "notes").clear()
+        wd.find_element(By.NAME, "notes").send_keys(contactData.notes)
+        # submit contact edition
+        wd.find_element(By.NAME, "update").click()
+        self.return_to_home_page()
+
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
