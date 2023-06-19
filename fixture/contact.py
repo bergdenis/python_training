@@ -11,10 +11,8 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "add new").click()
 
-    def create(self, contactData):
+    def fill_contact_form(self, contactData):
         wd = self.app.wd
-        self.open_contacts_page()
-        # fill contact form
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
         wd.find_element(By.NAME, "firstname").send_keys(contactData.firstname)
@@ -82,6 +80,11 @@ class ContactHelper:
         wd.find_element(By.NAME, "notes").click()
         wd.find_element(By.NAME, "notes").clear()
         wd.find_element(By.NAME, "notes").send_keys(contactData.notes)
+
+    def create(self, contactData):
+        wd = self.app.wd
+        self.open_contacts_page()
+        self.fill_contact_form(contactData)
         # submit form
         wd.find_element(By.NAME, "submit").click()
         self.return_to_home_page()
@@ -99,22 +102,7 @@ class ContactHelper:
         # init contact edition
         wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
         # edit contact form
-        wd.find_element(By.NAME, "address").click()
-        wd.find_element(By.NAME, "address").clear()
-        wd.find_element(By.NAME, "address").send_keys(contactData.address)
-        wd.find_element(By.NAME, "homepage").click()
-        wd.find_element(By.NAME, "homepage").clear()
-        wd.find_element(By.NAME, "homepage").send_keys(contactData.homepage)
-        wd.find_element(By.NAME, "aday").click()
-        Select(wd.find_element(By.NAME, "aday")).select_by_visible_text(contactData.aday)
-        wd.find_element(By.NAME, "amonth").click()
-        Select(wd.find_element(By.NAME, "amonth")).select_by_visible_text(contactData.amonth)
-        wd.find_element(By.NAME, "ayear").click()
-        wd.find_element(By.NAME, "ayear").clear()
-        wd.find_element(By.NAME, "ayear").send_keys(contactData.ayear)
-        wd.find_element(By.NAME, "notes").click()
-        wd.find_element(By.NAME, "notes").clear()
-        wd.find_element(By.NAME, "notes").send_keys(contactData.notes)
+        self.fill_contact_form(contactData)
         # submit contact edition
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
