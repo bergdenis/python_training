@@ -55,16 +55,6 @@ class ContactHelper:
         self.change_field_value("phone2", contactData.phone2)
         self.change_field_value("notes", contactData.notes)
 
-        # wd.find_element(By.NAME, "bday").click()
-        # Select(wd.find_element(By.NAME, "bday")).select_by_visible_text(contactData.bday)
-        #
-        # wd.find_element(By.NAME, "bmonth").click()
-        # Select(wd.find_element(By.NAME, "bmonth")).select_by_visible_text(contactData.bmonth)
-        #
-        # wd.find_element(By.NAME, "byear").click()
-        # wd.find_element(By.NAME, "byear").clear()
-        # wd.find_element(By.NAME, "byear").send_keys(contactData.byear)
-
     def create(self, contactData):
         wd = self.app.wd
         self.open_contacts_page()
@@ -96,3 +86,8 @@ class ContactHelper:
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_home_page()
+        return len(wd.find_elements(By.NAME, "selected[]"))
