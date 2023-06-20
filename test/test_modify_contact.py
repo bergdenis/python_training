@@ -27,5 +27,5 @@ def test_modify_contact_amonth(app):
 
 def test_modify_contact_ayear(app):
     if app.contact.count() == 0:
-        app.contact.create(ContactData(ayear=""))
+        app.contact.create(ContactData(ayear="2010"))
     app.contact.modify_first_contact(ContactData(ayear="2011"))
