@@ -1,6 +1,15 @@
 from model.contactData import ContactData
 
 
+def test_modify_contact_lastname(app):
+    if app.contact.count() == 0:
+        app.contact.create(ContactData(lastname="Test"))
+    old_contacts = app.contact.get_contact_list()
+    app.contact.modify_first_contact(ContactData(lastname="last name"))
+    new_contacts = app.contact.get_contact_list()
+    assert len(old_contacts) == len(new_contacts)
+
+
 def test_modify_contact_nickname(app):
     if app.contact.count() == 0:
         app.contact.create(ContactData(nickname="Test"))
