@@ -40,11 +40,15 @@ def test_modify_contact_nickname(app):
 #     new_contacts = app.contact.get_contact_list()
 #     assert len(old_contacts) == len(new_contacts)
 #
-#
-# def test_modify_contact_ayear(app):
-#     if app.contact.count() == 0:
-#         app.contact.create(ContactData(ayear="2010"))
-#     old_contacts = app.contact.get_contact_list()
-#     app.contact.modify_first_contact(ContactData(ayear="2011"))
-#     new_contacts = app.contact.get_contact_list()
-#     assert len(old_contacts) == len(new_contacts)
+
+def test_modify_contact_ayear(app):
+    if app.contact.count() == 0:
+        app.contact.create(ContactData(ayear="2010"))
+    old_contacts = app.contact.get_contact_list()
+    contact = ContactData(ayear="2011")
+    contact.id = old_contacts[0].id
+    app.contact.modify_first_contact(contact)
+    new_contacts = app.contact.get_contact_list()
+    assert len(old_contacts) == len(new_contacts)
+    old_contacts[0].ayear = contact.ayear
+    assert sorted(old_contacts, key=ContactData.id_or_max) == sorted(new_contacts, key=ContactData.id_or_max)
