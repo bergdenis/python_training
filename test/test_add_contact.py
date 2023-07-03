@@ -11,7 +11,7 @@ def random_string(prefix, maxlen):
 
 
 def random_digits(maxlen):
-    symbols = string.digits + "()-"
+    symbols = string.digits + "()-" + " "
     digits = "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
     if random.choice([True, False]):
         digits = "+" + digits
