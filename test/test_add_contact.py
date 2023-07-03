@@ -10,9 +10,26 @@ def random_string(prefix, maxlen):
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-testdata = [ContactData(firstname="", lastname="", address="")] + [
-    ContactData(firstname=random_string("firstname", 10), lastname=random_string("lastname", 10), address=random_string("address", 20))
-    for i in range(5)
+def random_digits(maxlen):
+    symbols = string.digits + "()-"
+    digits = "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
+    if random.choice([True, False]):
+        digits = "+" + digits
+    return digits
+
+
+testdata = [
+    ContactData(firstname=random_string("firstname", 10) if random.choice([True, False]) else "",
+                lastname=random_string("lastname", 10) if random.choice([True, False]) else "",
+                address=random_string("address", 20) if random.choice([True, False]) else "",
+                email=random_string("email", 10) + "@mail.com" if random.choice([True, False]) else "",
+                email2=random_string("email2", 10) + "@mail.com" if random.choice([True, False]) else "",
+                email3=random_string("email3", 10) + "@mail.com" if random.choice([True, False]) else "",
+                home_number=random_digits(9) if random.choice([True, False]) else "",
+                mobile_number=random_digits(9) if random.choice([True, False]) else "",
+                work_number=random_digits(9) if random.choice([True, False]) else "",
+                secondary_number=random_digits(9) if random.choice([True, False]) else "")
+    for i in range(7)
 ]
 
 
@@ -24,7 +41,3 @@ def test_add_contact(app, contact):
     new_contacts = app.contact.get_contact_list()
     old_contacts.append(contact)
     assert sorted(old_contacts, key=ContactData.id_or_max) == sorted(new_contacts, key=ContactData.id_or_max)
-
-
-# home_number="111111", mobile_number="222222", work_number="333333",
-#                           email="mail@mail.com", email2="mail2@mail.com", email3="mail3@mail.com", secondary_number="555555"
