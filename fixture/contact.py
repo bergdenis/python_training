@@ -116,9 +116,8 @@ class ContactHelper:
 
     def modify_contact_by_id(self, id, new_contact_data):
         wd = self.app.wd
-        self.open_home_page()
-        # find and click on the edit button for the specified id
-        wd.find_element(By.CSS_SELECTOR, "a[href='edit.php?id=%s']" % id).click()
+        # open contact page with specified id
+        wd.get("http://localhost/addressbook/edit.php?id=%s" % id)
         # fill contact form
         self.fill_contact_form(new_contact_data)
         # submit modification
