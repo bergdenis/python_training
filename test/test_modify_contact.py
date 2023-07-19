@@ -1,18 +1,20 @@
 from model.contactData import ContactData
-from random import randrange
+import random
 
 
 def test_modify_contact_lastname(app, db, check_ui):
     if len(db.get_contact_list()) == 0:
         app.contact.create(ContactData(lastname="Test"))
     old_contacts = db.get_contact_list()
-    index = randrange(len(old_contacts))
-    contact = ContactData(lastname="new last name")
-    contact.id = old_contacts[index].id
-    app.contact.modify_contact_by_index(index, contact)
+    contact = random.choice(old_contacts)
+    modified_contact = ContactData(lastname="new last name", id=contact.id)
+    app.contact.modify_contact_by_id(contact.id, modified_contact)
     new_contacts = db.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
-    old_contacts[index].lastname = contact.lastname
+    for i, c in enumerate(old_contacts):
+        if c.id == contact.id:
+            old_contacts[i] = modified_contact
+            break
     assert sorted(old_contacts, key=ContactData.id_or_max) == sorted(new_contacts, key=ContactData.id_or_max)
     if check_ui:
         assert sorted(new_contacts, key=ContactData.id_or_max) == sorted(app.contact.get_contact_list(), key=ContactData.id_or_max)

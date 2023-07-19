@@ -114,6 +114,18 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def modify_contact_by_id(self, id, new_contact_data):
+        wd = self.app.wd
+        self.open_home_page()
+        # find and click on the edit button for the specified id
+        wd.find_element(By.CSS_SELECTOR, "a[href='edit.php?id=%s']" % id).click()
+        # fill contact form
+        self.fill_contact_form(new_contact_data)
+        # submit modification
+        wd.find_element(By.NAME, "update").click()
+        self.return_to_home_page()
+        self.contact_cache = None
+
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
