@@ -13,6 +13,7 @@ def test_add_contact_to_group(app, orm):
     app.contact.add_contact_to_group(random_contact, random_group)
     assert random_contact in orm.get_contacts_in_group(random_group)
 
+
 def test_delete_contact_from_group(app, orm):
     if len(orm.get_group_list()) == 0:
         app.group.create(Group(name="Test"))
