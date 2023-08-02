@@ -211,5 +211,6 @@ class ContactHelper:
         self.open_home_page()
         wd.find_element(By.NAME, "group").find_element(By.CSS_SELECTOR, "option[value='%s']" % group.id).click()
         self.select_contact_by_id(contact.id)
-        wd.find_element(By.NAME, "remove").click()
+        wd.find_element(By.XPATH, "//input[@name='remove']").click()
+        wd.find_element(By.LINK_TEXT, "groups").click()
         self.open_home_page()
