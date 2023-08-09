@@ -23,12 +23,12 @@ Delete contact
     Remove Values From List  ${old_list}  ${contact}
     Contact Lists Should be Equal  ${new_list}  ${old_list}
 
-#Modify contact
-#    ${old_list}=  Get Contact List
-#    ${contact_for_editing}=  Random contact  ${old_list}
-#    ${contact_data}=  Create contact data  Edited_firstname  Edited_lastname
-#    Modify Contact  ${contact_for_editing}  ${contact_data}
-#    ${new_list}=  Get Contact List
-#    Remove values from list  ${old_list}  ${contact_for_editing}
-#    Append to list  ${old_list}  ${contact_data}
-#    Contact lists should be equal  ${new_list}  ${old_list}
+Modify contact
+    ${old_list}=  Get Contact List
+    ${contact_for_editing}=  Random contact  ${old_list}
+    ${contact_data}=  Create contact data  Edited_firstname  Edited_lastname
+    Modify Contact  ${contact_for_editing}  ${contact_data}
+    ${new_list}=  Get Contact List
+    Remove values from list  ${old_list}  ${contact_for_editing}
+    Append to list  ${old_list}  ${contact_data}
+    Contact lists should be equal  ${new_list}  ${old_list}
