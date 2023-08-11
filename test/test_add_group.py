@@ -3,7 +3,7 @@ from model.group import Group
 import allure
 
 
-def test_add_group(app, db, json_groups):
+def test_add_group(app, db, json_groups, check_ui):
     group = json_groups
     with allure.step('Given a group list'):
         old_groups = db.get_group_list()
